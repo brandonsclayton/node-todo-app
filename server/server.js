@@ -28,15 +28,15 @@ app.post('/todos', (req, res) => {
 });
 
 app.post('/users', (req, res) => {
-  console.log(req.body);
   let body = _.pick(req.body, ['email', 'password']);
-  console.log(body);
-
   let user = new User(body);
 
-  user.save().then((doc) => {
-    res.send(doc);
-  }).catch((err) => res.status(400).send(err));
+  user.save().then(() => {
+    return user.generateAuthToken();
+  }).then((token) => {
+    res.header('x-auth', token).send(user);
+  })
+  .catch((err) => res.status(400).send(err));
 });
 
 app.get('/todos', (req, res) => {
