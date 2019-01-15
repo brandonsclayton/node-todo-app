@@ -8,7 +8,7 @@ let { Todo } = require('./models/todo');
 let { User } =  require('./models/user');
 
 let app = express();
-const port = process.end.PORT || 3030;
+const port = process.env.PORT || 3030;
 
 app.use(bodyParser.json());
 
