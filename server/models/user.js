@@ -52,7 +52,7 @@ UserSchema.methods.generateAuthToken = function() {
     access
   }, secert).toString();
 
-  user.tokens.push({ access, token });
+  user.tokens = user.tokens.concat([{ access, token }]);
 
   return user.save().then(() => {
     return token;
