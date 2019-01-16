@@ -8,6 +8,8 @@ const { User } =require('../../models/user');
 let userOneId = new ObjectID();
 let userTwoID = new ObjectID();
 
+let secert = process.env.JWT_SECERT;
+
 const users = [
   {
     _id: userOneId,
@@ -16,7 +18,7 @@ const users = [
     tokens: [
       {
         access: 'auth',
-        token: jwt.sign({_id: userOneId, access: 'auth'}, 'abc123').toString(),
+        token: jwt.sign({_id: userOneId, access: 'auth'}, secert).toString(),
       }
     ]
   }, {
@@ -26,7 +28,7 @@ const users = [
     tokens: [
       {
         access: 'auth',
-        token: jwt.sign({_id: userTwoID, access: 'auth'}, 'abc123').toString(),
+        token: jwt.sign({_id: userTwoID, access: 'auth'}, secert).toString(),
       }
     ]
   }
